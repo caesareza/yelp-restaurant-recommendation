@@ -72,7 +72,10 @@ cvs = cross_val_score(model, X_train_knn, y_train_knn, scoring='accuracy', cv=cv
 y_pred = cross_val_predict(model, X_train_knn, y_train_knn, cv=cv)
 
 from sklearn.metrics import mean_absolute_error
+from sklearn.metrics import mean_squared_error
 mae = mean_absolute_error(y_train_knn, y_pred)
+mse = mean_squared_error(y_train_knn, y_pred)
+rmse = mean_squared_error(y_train_knn, y_pred, squared=False)
 
 print('y_pred.shape',y_pred.shape)
 print(f"Score on training set: {accuracy_train}")
@@ -81,6 +84,8 @@ print(f"Score on test set: {accuracy_test}")
 # report performance
 print('Accuracy: %.3f (%.3f)' % (mean(cvs), std(cvs)))
 print('MAE', mae)
+print('MSE', mse)
+print('RMSE', rmse)
 
 # Confusion Matrix
 from sklearn.metrics import confusion_matrix
@@ -89,12 +94,12 @@ print('confusion matrix', cm)
 
 # Recall
 from sklearn.metrics import recall_score
-recall = recall_score(y_train_knn, y_pred, average=None)
+recall = recall_score(y_train_knn, y_pred, average='weighted')
 print('recall:', recall)
 
 # Precision
 from sklearn.metrics import precision_score
-precision = precision_score(y_train_knn, y_pred, average=None)
+precision = precision_score(y_train_knn, y_pred, average='weighted')
 print('precision:', precision)
 
 # Method 1: sklearn
@@ -102,7 +107,7 @@ from sklearn.metrics import f1_score
 f1_score(y_train_knn, y_pred, average=None)
 # Method 2: Manual Calculation
 F1 = 2 * (precision * recall) / (precision + recall)
-print('F1:', F1)
+print('F-Measure:', F1)
 
 
 # look at the last row for the test
