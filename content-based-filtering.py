@@ -13,8 +13,9 @@ nltk.download('stopwords')
 # 5700 pizza / Ital Vera Pizza
 # 6000 baked / The Baked Bear
 # 7500 mexican / 1900 Mexican Grill
-businesses = pd.read_csv('yelp_academic_dataset_business.csv', nrows=7500)
-review = pd.read_csv('yelp_academic_dataset_review.csv', nrows=7500)
+# 15000 fish category / Catchers Fish House
+businesses = pd.read_csv('yelp_academic_dataset_business.csv', nrows=15000)
+# review = pd.read_csv('yelp_academic_dataset_review.csv', nrows=7500)
 
 restoran = businesses[['business_id','name','address', 'categories', 'attributes','stars']]
 
@@ -102,7 +103,7 @@ from sklearn.metrics import precision_score
 precision = precision_score(y_train_knn, y_pred, average='weighted')
 print('precision:', precision)
 
-# Method 1: sklearn
+# f1_score
 from sklearn.metrics import f1_score
 f1_score(y_train_knn, y_pred, average=None)
 # Method 2: Manual Calculation
@@ -117,7 +118,7 @@ print(df_final.iloc[-1:])
 print("Validation set (Restaurant name): ", df_final['name'].values[-1])
 
 
-# test set from the df_final table (only last row): Restaurant name: "Steak & Cheese & Quick Pita Restaurant"
+# test set from the df_final table (only last row)
 test_set = df_final.iloc[-1:,:-2]
 
 # validation set from the df_final table (exclude the last row)
@@ -127,18 +128,18 @@ y_val = df_final['stars'].iloc[:-1]
 # fit model with validation set
 n_knn = knn.fit(X_val, y_val)
 
-# distances and indeces from validation set (Steak & Cheese & Quick Pita Restaurant)
+# distances and indeces from validation set
 distances, indeces =  n_knn.kneighbors(test_set)
 #n_knn.kneighbors(test_set)[1][0]
 
-# create table distances and indeces from "Steak & Cheese & Quick Pita Restaurant"
+# create table distances and indeces
 final_table = pd.DataFrame(n_knn.kneighbors(test_set)[0][0], columns = ['distance'])
 final_table['index'] = n_knn.kneighbors(test_set)[1][0]
 final_table.set_index('index')
 
 print(final_table.set_index('index'))
 
-# get names of the restaurant that similar to the "Steak & Cheese & Quick Pita Restaurant"
+# get names of the restaurant that similar to the last row
 result = final_table.join(df_final,on='index')
 hasil = result.head(5)
 print(hasil)
