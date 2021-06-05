@@ -64,7 +64,7 @@ tfidf = TfidfVectorizer(stop_words='english')
 
 #Construct the required TF-IDF matrix by fitting and transforming the data
 tfidf_matrix = tfidf.fit_transform(restaurants_and_food['categories'])
-
+0
 tfidf_matrix.shape
 # print (tfidf_matrix.shape)
 

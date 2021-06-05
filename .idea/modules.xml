@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../movie/.idea/movie.iml" filepath="$PROJECT_DIR$/../movie/.idea/movie.iml" />
       <module fileurl="file://$PROJECT_DIR$/../rs-surprise/.idea/rs-surprise.iml" filepath="$PROJECT_DIR$/../rs-surprise/.idea/rs-surprise.iml" />
       <module fileurl="file://$PROJECT_DIR$/../sklearn/.idea/sklearn.iml" filepath="$PROJECT_DIR$/../sklearn/.idea/sklearn.iml" />
       <module fileurl="file://$PROJECT_DIR$/../sw-test/.idea/sw-test.iml" filepath="$PROJECT_DIR$/../sw-test/.idea/sw-test.iml" />
